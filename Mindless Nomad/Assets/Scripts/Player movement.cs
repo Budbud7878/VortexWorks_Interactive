@@ -8,6 +8,9 @@ public class Playermovement : MonoBehaviour
     private float speed = 8f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
+    public SpriteRenderer sc;
+    public Sprite newsprite;
+    public Sprite newsprite2;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -33,14 +36,17 @@ public class Playermovement : MonoBehaviour
         }
         Flip();
     }
-
+    
     private void FixedUpdate()
     {
         // Movement speed for player
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if (horizontal != 0)
         {
-            ;
+            ChangeSprite2();
+        }
+        else { 
+            ChangeSprite(); 
         }
     }
 
@@ -59,5 +65,15 @@ public class Playermovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    //Changes the sprite
+    void ChangeSprite()
+    {
+        sc.sprite = newsprite;
+    }
+    void ChangeSprite2()
+    {
+        sc.sprite = newsprite2;
     }
 }
