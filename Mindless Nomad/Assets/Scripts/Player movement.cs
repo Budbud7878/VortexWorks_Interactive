@@ -36,15 +36,22 @@ public class Playermovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Movement speed for player
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (horizontal != 0)
+        {
+            ;
+        }
     }
 
     private bool IsGrounded()
     {
+        // Check If the player is grounded
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
     private void Flip()
     {
+        // Character Flip left and right
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
