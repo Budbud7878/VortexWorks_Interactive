@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 605128111}
   - component: {fileID: 605128110}
   - component: {fileID: 605128115}
+  - component: {fileID: 605128116}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 605128112}
-  newsprite: {fileID: -1827124110, guid: b8a3ae936686ee14abc90a536f408295, type: 3}
+  animator: {fileID: 605128115}
   rb: {fileID: 605128113}
   groundCheck: {fileID: 2032757434}
   groundLayer:
@@ -394,7 +395,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1827124110, guid: b8a3ae936686ee14abc90a536f408295, type: 3}
+  m_Sprite: {fileID: -348345926, guid: b8a3ae936686ee14abc90a536f408295, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -470,6 +471,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &605128116
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605128109}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &713227039
 GameObject:
   m_ObjectHideFlags: 0

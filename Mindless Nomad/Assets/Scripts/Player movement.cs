@@ -5,12 +5,11 @@ using UnityEngine;
 public class Playermovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
+    private float speed = 6f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
     public SpriteRenderer sc;
-    public Sprite newsprite;
-    public Sprite newsprite2;
+    public Animator animator;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -18,14 +17,17 @@ public class Playermovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if(Input.GetButtonDown("Jump") && IsGrounded())
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
+
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
@@ -36,18 +38,11 @@ public class Playermovement : MonoBehaviour
         }
         Flip();
     }
-    
+
     private void FixedUpdate()
     {
         // Movement speed for player
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if (horizontal != 0)
-        {
-            ChangeSprite2();
-        }
-        else { 
-            ChangeSprite(); 
-        }
     }
 
     private bool IsGrounded()
@@ -65,15 +60,5 @@ public class Playermovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
-    }
-
-    //Changes the sprite
-    void ChangeSprite()
-    {
-        sc.sprite = newsprite;
-    }
-    void ChangeSprite2()
-    {
-        sc.sprite = newsprite2;
     }
 }
