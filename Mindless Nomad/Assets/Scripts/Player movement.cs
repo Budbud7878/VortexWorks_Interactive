@@ -5,11 +5,13 @@ using UnityEngine;
 public class Playermovement : MonoBehaviour
 {
     private float horizontal;
+    private bool sprinting;
     private float speed = 6f;
     private float jumpingPower = 16f;
     private bool isFacingRight = true;
     public SpriteRenderer sc;
     public Animator animator;
+    
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -23,6 +25,7 @@ public class Playermovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+        sprinting = Input.GetKey(KeyCode.LeftShift);
 
         animator.SetFloat("speed", Mathf.Abs(horizontal));
 
@@ -36,12 +39,13 @@ public class Playermovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+        Sprint();
         Flip();
     }
 
     private void FixedUpdate()
     {
-        // Movement speed for player
+        // Movement speed for player for air
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
 
@@ -59,6 +63,13 @@ public class Playermovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+        }
+    }
+    private void Sprint() 
+    {
+        if (sprinting == true)
+        {
+            horizontal = horizontal * 2;
         }
     }
 }
