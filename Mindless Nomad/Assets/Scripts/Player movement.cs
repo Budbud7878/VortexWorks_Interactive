@@ -35,10 +35,30 @@ public class Playermovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
 
+        if (rb.velocity.y > 0f)
+        {
+            animator.SetBool("isjumping", true);
+        }
+
+        if (rb.velocity.y == 0f)
+        {
+            animator.SetBool("isjumping", false);
+        }
+
+        if (Input.GetButtonDown("Jump") == true)
+        {
+            animator.SetBool("isjumping", true);
+        }
+        if (IsGrounded() == true)
+        {
+            animator.SetBool("isjumping", false);
+        }
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+        LooseMomentum();
+        Crouchingis();
         Sprint();
         Flip();
     }
@@ -69,7 +89,49 @@ public class Playermovement : MonoBehaviour
     {
         if (sprinting == true)
         {
-            horizontal = horizontal * 2;
+            speed = speed + 0.1f;
+            SpeedLimit();
         }
+        if (sprinting && Input.GetKey(KeyCode.C) == false)
+        {
+            speed = speed - 0.0001f;
+            if (speed <= 6f)
+            {
+                speed = 6f;
+            }
+        }
+    }
+    private void Crouchingis()
+    {
+        if (Input.GetKey(KeyCode.C) == true && IsGrounded())
+        {
+            // HERE WE NEED TO ADD ADJUST FOR BOX COLIDER WHILE CROUCHING
+            animator.SetBool("iscrouching", true);
+            speed = 4f;
+            if (Input.GetKey(KeyCode.LeftShift)){
+                speed = 4f;
+            }
+        }
+        else
+        {
+            animator.SetBool("iscrouching", false);
+        }
+    }
+    private void SpeedLimit() {
+        if (speed >= 12)
+        {
+            speed = 12;
+        }
+    }
+    private void LooseMomentum()
+    {
+        if (horizontal == 0)
+        {
+            speed = 6f;
+        }
+    }
+    private IEnumerator DelayS()
+    {
+        yield return new WaitForSeconds(1);
     }
 }
